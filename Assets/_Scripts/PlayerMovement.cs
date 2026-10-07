@@ -64,9 +64,17 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // Debug.Log("Enter trigger area.");
-        Debug.Log(
+        // if(collision.gameObject.name == "Coin")
+        // {
+        //     // Debug.Log("Enter trigger area.");
+        //     Debug.Log("You picked up a coin");
+        // }
+
+        if(collision.CompareTag("Coin"))
+        {
+            Debug.Log(
             "You received a " + collision.gameObject.name + " !"
-        );
+            );
+        }
     }
 }
