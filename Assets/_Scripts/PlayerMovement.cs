@@ -55,4 +55,10 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(targetPosition);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Debug.Log("Collision detected!!");
+        Debug.Log("You hit: " + collision.gameObject.name);
+    }
 }
