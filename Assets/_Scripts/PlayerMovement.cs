@@ -61,4 +61,12 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("Collision detected!!");
         Debug.Log("You hit: " + collision.gameObject.name);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Debug.Log("Enter trigger area.");
+        Debug.Log(
+            "You received a " + collision.gameObject.name + " !"
+        );
+    }
 }
