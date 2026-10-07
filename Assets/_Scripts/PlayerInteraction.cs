@@ -18,6 +18,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if(collision.CompareTag("Coin"))
         {
+            Destroy(collision.gameObject);
             Debug.Log(
             "You received a " + collision.gameObject.name + " !"
             );
