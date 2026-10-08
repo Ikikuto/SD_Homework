@@ -6,6 +6,13 @@ public class PlayerInteraction : MonoBehaviour
     {
         // Debug.Log("Collision detected!!");
         Debug.Log("You hit: " + collision.gameObject.name);
+        
+        EnemyHealth enemyHealth =
+            collision.gameObject.GetComponent<EnemyHealth>();
+        if(enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(50);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

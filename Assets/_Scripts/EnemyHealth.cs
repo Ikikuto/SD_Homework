@@ -3,11 +3,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 50;
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
+    private EnemySpawner enemySpawner;
 
-    private void Awake()
+    [System.Obsolete] private void Awake()
     {
         currentHealth = maxHealth;
+        enemySpawner =
+            FindFirstObjectByType<EnemySpawner>();
     }
 
     public void TakeDamage(int damage)
@@ -27,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Die()
     {
+        enemySpawner.SpawnEnemy();
         Destroy(gameObject);
     }
 }
