@@ -2,13 +2,30 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Debug.Log("Collision detected!!");
-        Debug.Log("You hit: " + collision.gameObject.name);
-    }
+    // void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     // Debug.Log("Collision detected!!");
+    //     Debug.Log("You hit: " + collision.gameObject.name);
+    // }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    // [SerializeField] public int attackDamage = 10;
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Hit: " + collision.gameObject.name);
+        }
+        // else if(collision.gameObject.CompareTag("Enemy"))
+        // {
+        //     EnemyHealth enemyHealth =
+        //         collision.gameObject.GetComponent<EnemyHealth>();
+        //     if (enemyHealth != null)
+        //     {
+        //         enemyHealth.TakeDamage(attackDamage);
+        //     }
+        // }
+    }
+        void OnTriggerEnter2D(Collider2D collision)
     {
         // if(collision.gameObject.name == "Coin")
         // {
