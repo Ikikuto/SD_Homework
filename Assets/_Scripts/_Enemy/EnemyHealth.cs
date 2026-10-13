@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f;
+    [SerializeField] private int scoreReward = 20;
+    [SerializeField] private GameScore gameScore;
     private EnemyMovement enemyMovement;
     private int currentHealth;
     private EnemySpawner enemySpawner;
@@ -40,6 +42,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        if (gameScore != null)
+        {
+            gameScore.AddScore(scoreReward);
+        }
         Destroy(gameObject);
         enemySpawner.SpawnEnemy();
     }
