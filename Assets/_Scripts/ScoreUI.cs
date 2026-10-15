@@ -9,4 +9,9 @@ public class ScoreUI : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
     }
+
+    public void SetFinalScore(int score)
+    {
+        scoreText.text = "Final Score: " + score + " !!";
+    }
 }

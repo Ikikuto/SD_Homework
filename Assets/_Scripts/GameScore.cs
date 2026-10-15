@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameScore : MonoBehaviour
 {
-    [SerializeField] private ScoreUI scoreUI;
+    [SerializeField] private ScoreUI updateScore;
+    [SerializeField] private ScoreUI finalScore;
     private int score;
     public int Score
     {
@@ -31,9 +33,14 @@ public class GameScore : MonoBehaviour
 
     private void UpdateUI()
     {
-        if(scoreUI != null)
+        if(updateScore != null)
         {
-            scoreUI.SetScore(score);
+            updateScore.SetScore(score);
+        }
+        
+        if (finalScore != null)
+        {
+            finalScore.SetFinalScore(score);
         }
     }
 
@@ -44,4 +51,5 @@ public class GameScore : MonoBehaviour
             AddScore(10);
         }
     }
+
 }

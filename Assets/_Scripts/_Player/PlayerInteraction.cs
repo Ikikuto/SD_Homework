@@ -65,7 +65,6 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         string coinName = collision.gameObject.name.Trim();
-
         var points = coinName switch
         {
             "BronzeCoin" => 1,
@@ -78,4 +77,5 @@ public class PlayerInteraction : MonoBehaviour
 
         Destroy(collision.gameObject);
     }
+
 }

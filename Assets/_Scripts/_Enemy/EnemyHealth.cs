@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f;
-    [SerializeField] private int scoreReward = 20;
+    // [SerializeField] private int scoreReward = 20;
     [SerializeField] private GameScore gameScore;
     private EnemyMovement enemyMovement;
     private int currentHealth;
@@ -42,12 +42,22 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        string enemyName = transform.parent.name.Trim();
+        var points = enemyName switch
+        {
+            "NormalEnemy" => 100,
+            "FastEnemy" => 150,
+            "TankEnemy" => 300,
+            _ => 1,
+        };
+        
         if (gameScore != null)
         {
-            gameScore.AddScore(scoreReward);
+            Debug.Log(points + "destroyed.");
+            gameScore.AddScore(points);
         }
         Destroy(gameObject);
-        enemySpawner.SpawnEnemy();
+        // enemySpawner.SpawnEnemy();
     }
 
     private void ApplyKnockback(Vector2 attackerPosision)

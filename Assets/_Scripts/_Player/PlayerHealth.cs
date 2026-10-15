@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
         // Debug.Log("Player Health: " + currentHealth);
         if (healthBarUI != null)
         {
-            healthBarUI.SetHealth(currentHealth);
+            healthBarUI.SetHealth(currentHealth, maxHealth);
         }
 
         if (currentHealth == 0)
@@ -50,4 +50,5 @@ public class PlayerHealth : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+    
 }

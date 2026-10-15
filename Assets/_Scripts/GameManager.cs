@@ -33,4 +33,5 @@ public class GameManager : MonoBehaviour
             SceneManager.
             GetActiveScene().buildIndex);
     }
+
 }
