@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f;
-    // [SerializeField] private int scoreReward = 20;
+    [SerializeField] private int scoreValue = 20;
     [SerializeField] private GameScore gameScore;
     private EnemyMovement enemyMovement;
     private int currentHealth;
@@ -16,8 +16,9 @@ public class EnemyHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        enemySpawner =
-            FindFirstObjectByType<EnemySpawner>();
+        // enemySpawner =
+        //     FindFirstObjectByType<EnemySpawner>();
+        gameScore = FindFirstObjectByType<GameScore>();
         rb = GetComponentInParent<Rigidbody2D>();
         enemyMovement = GetComponentInParent<EnemyMovement>();
     }
@@ -42,22 +43,17 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        string enemyName = transform.parent.name.Trim();
-        var points = enemyName switch
-        {
-            "NormalEnemy" => 100,
-            "FastEnemy" => 150,
-            "TankEnemy" => 300,
-            _ => 1,
-        };
-        
         if (gameScore != null)
         {
-            Debug.Log(points + "destroyed.");
-            gameScore.AddScore(points);
+            gameScore.AddScore(scoreValue);
         }
-        Destroy(gameObject);
-        // enemySpawner.SpawnEnemy();
+
+        if(enemySpawner != null)
+        {
+            enemySpawner.SpawnEnemy();
+        }
+
+        Destroy(transform.parent.gameObject);
     }
 
     private void ApplyKnockback(Vector2 attackerPosision)
@@ -80,6 +76,11 @@ public class EnemyHealth : MonoBehaviour
         rb.AddForce(
             direction * knockbackForce, 
             ForceMode2D.Impulse);
+    }
+
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        enemySpawner = spawner;
     }
 
 }

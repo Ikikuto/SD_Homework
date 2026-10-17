@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameScore : MonoBehaviour
 {
     [SerializeField] private ScoreUI updateScore;
-    [SerializeField] private ScoreUI finalScore;
     private int score;
     public int Score
     {
@@ -36,11 +35,6 @@ public class GameScore : MonoBehaviour
         if(updateScore != null)
         {
             updateScore.SetScore(score);
-        }
-        
-        if (finalScore != null)
-        {
-            finalScore.SetFinalScore(score);
         }
     }
 

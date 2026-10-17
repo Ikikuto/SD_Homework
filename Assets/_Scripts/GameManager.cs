@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameScore gameScore;
+    [SerializeField] private ScoreUI finalScoreText;
     private bool isGameOver;
 
     private void Start()
@@ -20,6 +22,11 @@ public class GameManager : MonoBehaviour
         }
 
         isGameOver = true;
+
+        if (gameScore != null && finalScoreText != null)
+        {
+            finalScoreText.SetFinalScore(gameScore.Score);
+        }
 
         if (gameOverPanel != null)
         {
