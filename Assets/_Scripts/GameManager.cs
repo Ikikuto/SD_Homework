@@ -32,13 +32,22 @@ public class GameManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
         }
+
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(
             SceneManager.
-            GetActiveScene().buildIndex);
+            GetActiveScene().name);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenuScene");
     }
 
 }
