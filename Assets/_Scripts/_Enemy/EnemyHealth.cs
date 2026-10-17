@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f;
+    [SerializeField] private int scoreValue = 20;
+    [SerializeField] private GameScore gameScore;
     private EnemyMovement enemyMovement;
     private int currentHealth;
     private EnemySpawner enemySpawner;
@@ -14,8 +16,9 @@ public class EnemyHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        enemySpawner =
-            FindFirstObjectByType<EnemySpawner>();
+        // enemySpawner =
+        //     FindFirstObjectByType<EnemySpawner>();
+        gameScore = FindFirstObjectByType<GameScore>();
         rb = GetComponentInParent<Rigidbody2D>();
         enemyMovement = GetComponentInParent<EnemyMovement>();
     }
@@ -40,8 +43,17 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
-        enemySpawner.SpawnEnemy();
+        if (gameScore != null)
+        {
+            gameScore.AddScore(scoreValue);
+        }
+
+        if(enemySpawner != null)
+        {
+            enemySpawner.SpawnEnemy();
+        }
+
+        Destroy(transform.parent.gameObject);
     }
 
     private void ApplyKnockback(Vector2 attackerPosision)
@@ -64,6 +76,11 @@ public class EnemyHealth : MonoBehaviour
         rb.AddForce(
             direction * knockbackForce, 
             ForceMode2D.Impulse);
+    }
+
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        enemySpawner = spawner;
     }
 
 }
