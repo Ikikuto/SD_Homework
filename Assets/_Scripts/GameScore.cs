@@ -15,7 +15,17 @@ public class GameScore : MonoBehaviour
 
     private void Start()
     {
+        if (GameSession.Instance != null)
+        {
+            score = GameSession.Instance.Score;
+        }
+
         UpdateUI();
+
+        if (PersistentGameManager.Instance != null)
+        {
+            PersistentGameManager.Instance.UpdateHighScore(score);
+        }
     }
 
     public void AddScore(int amount)
@@ -26,6 +36,16 @@ public class GameScore : MonoBehaviour
         }
 
         score += amount;
+
+        if (GameSession.Instance != null)
+        {
+            GameSession.Instance.Score = score;
+        }
+
+        if (PersistentGameManager.Instance != null)
+        {
+            PersistentGameManager.Instance.UpdateHighScore(score);
+        }
 
         UpdateUI();
     }

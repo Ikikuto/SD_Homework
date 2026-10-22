@@ -5,6 +5,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private CoinCounterUI coinCounterUI;
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField, Min(1)] private int maxSlots = 5;
     private int coinCount;
 
     public int CoinCount
@@ -17,10 +18,14 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
+        LoadInventory();
+
         if (coinCounterUI != null)
         {
             coinCounterUI.SetCointCount(coinCount);
         }
+
+        RefeshUI();
     }
 
     public void AddCoin(int amount)
@@ -31,6 +36,8 @@ public class PlayerInventory : MonoBehaviour
         }
 
         coinCount += amount;
+
+        SaveInventory();
 
         if (coinCounterUI != null)
         {
@@ -43,14 +50,14 @@ public class PlayerInventory : MonoBehaviour
     //Cung cap danh sach item
     public IReadOnlyList<Item> Items
     {
-        get{return items;}
+        get { return items; }
     }
 
     public Item FindItem(int id)
     {
         foreach (Item item in items)
         {
-            if(item.Id == id)
+            if (item.Id == id)
             {
                 return item;
             }
@@ -61,6 +68,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddItem(Item newItem)
     {
+        // VALID CHECK
+        if(newItem == null || newItem.Quantity <= 0) return;
+
         Item existingItem = FindItem(newItem.Id);
 
         if (existingItem != null)
@@ -68,31 +78,39 @@ public class PlayerInventory : MonoBehaviour
             existingItem.Quantity += newItem.Quantity;
             // return;
         }
-        else
+        else if (items.Count < maxSlots)
         {
             items.Add(newItem);
         }
+        else
+        {
+            Debug.Log($"Cannot Add Item_Id: {newItem.Id}");
+            return;
+        }
+            
 
+        SaveInventory();
         RefeshUI();
     }
 
     public bool RemoveItem(int id, int amount)
     {
-        if(amount <= 0) return false;
+        if (amount <= 0) return false;
 
         Item item = FindItem(id);
 
-        if(item == null) return false;
+        if (item == null) return false;
 
-        if(item.Quantity < amount) return false;
+        if (item.Quantity < amount) return false;
 
         item.Quantity -= amount;
 
-        if(item.Quantity == 0)
+        if (item.Quantity == 0)
         {
             items.Remove(item);
         }
 
+        SaveInventory();
         RefeshUI();
         return true;
     }
@@ -101,17 +119,61 @@ public class PlayerInventory : MonoBehaviour
     {
         const int healthPotionId = 1;
         bool removed = RemoveItem(healthPotionId, 1);
-        if(!removed) return;
+        if (!removed) return;
 
         playerHealth.Heal(25);
     }
 
+    public void UseLargeHealthPotion(PlayerHealth playerHealth)
+    {
+        const int ItemId = 4;
+        bool removed = RemoveItem(ItemId, 1);
+        if (!removed) return;
+
+        playerHealth.Heal(50);
+    }
+
     private void RefeshUI()
     {
-        if(inventoryUI != null)
+        if (inventoryUI != null)
         {
             inventoryUI.Refesh(items);
         }
     }
 
+    //REMOVE BY QUANTITY
+    public bool HasItem(int id, int amount)
+    {
+        //VALID CHECK
+        if(amount <= 0) return false;
+
+        Item existingItem = FindItem(id);
+
+        return existingItem != null 
+            && existingItem.Quantity >= amount; 
+    }
+
+    private void LoadInventory()
+    {
+        if (GameSession.Instance == null)
+        {
+            return;
+        }
+
+        coinCount = GameSession.Instance.CoinCount;
+        items = GameSession.Instance.LoadItems();
+    }
+
+    private void SaveInventory()
+    {
+        if (GameSession.Instance == null)
+        {
+            return;
+        }
+
+        GameSession.Instance.CoinCount = coinCount;
+        GameSession.Instance.SaveItems(items);
+    }
+
+    
 }
