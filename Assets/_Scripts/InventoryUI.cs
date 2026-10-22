@@ -10,13 +10,26 @@ public class InventoryUI : MonoBehaviour
     public void Refesh(IReadOnlyList<Item> items)
     {
         StringBuilder builder = new();
-        builder.AppendLine("Inventory");
-
-        foreach (Item item in items)
+        if (items.Count < 5)
         {
-            builder.AppendLine(item.ItemName + " x" + item.Quantity);
-        }
+            builder.AppendLine(
+                "INVENTORY: (Total: " + items.Count + ")");
+            foreach (Item item in items)
+            {
+                builder.AppendLine(item.ItemName + " x" + item.Quantity);
+            }
 
-        inventoryText.SetText(builder);
+            inventoryText.SetText(builder);
+        }
+        else
+        {
+            builder.AppendLine("INVENTORY: (Full)");
+            foreach (Item item in items)
+            {
+                builder.AppendLine(item.ItemName + " x" + item.Quantity);
+            }
+
+            inventoryText.SetText(builder);
+        }        
     }
 }
