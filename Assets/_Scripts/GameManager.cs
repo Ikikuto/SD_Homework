@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //Sau khi game over
 
         if (GameSession.Instance != null)
         {
@@ -46,13 +46,12 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(
-            SceneManager.
-            GetActiveScene().name);
+            SceneManager.GetActiveScene().name);
     }
 
     public void ReturnToMainMenu()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //Sau khi game over
         SceneManager.LoadScene("MainMenuScene");
     }
 

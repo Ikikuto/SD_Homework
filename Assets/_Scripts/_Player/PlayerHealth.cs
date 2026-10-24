@@ -6,6 +6,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthBarUI healthBarUI;
     [SerializeField] private GameManager gameManager;
     private int currentHealth;
+    public int CurrentHealth
+    {
+        get{return currentHealth;}
+    }
     // private void Awake()
     // {
     //     currentHealth = maxHealth;
@@ -105,6 +109,22 @@ public class PlayerHealth : MonoBehaviour
         if (GameSession.Instance != null)
         {
             GameSession.Instance.SaveHealth(currentHealth);
+        }
+    }
+
+    //CHECK LAI PHAN NAY
+    public void SetHealth(int health)
+    {
+        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+        SaveHealth();
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetHealth(currentHealth, maxHealth);
+        }
+
+        if (currentHealth == 0)
+        {
+            Die();
         }
     }
 }

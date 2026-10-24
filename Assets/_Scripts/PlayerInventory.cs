@@ -69,7 +69,7 @@ public class PlayerInventory : MonoBehaviour
     public void AddItem(Item newItem)
     {
         // VALID CHECK
-        if(newItem == null || newItem.Quantity <= 0) return;
+        if (newItem == null || newItem.Quantity <= 0) return;
 
         Item existingItem = FindItem(newItem.Id);
 
@@ -87,7 +87,7 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log($"Cannot Add Item_Id: {newItem.Id}");
             return;
         }
-            
+
 
         SaveInventory();
         RefeshUI();
@@ -145,12 +145,12 @@ public class PlayerInventory : MonoBehaviour
     public bool HasItem(int id, int amount)
     {
         //VALID CHECK
-        if(amount <= 0) return false;
+        if (amount <= 0) return false;
 
         Item existingItem = FindItem(id);
 
-        return existingItem != null 
-            && existingItem.Quantity >= amount; 
+        return existingItem != null
+            && existingItem.Quantity >= amount;
     }
 
     private void LoadInventory()
@@ -175,5 +175,62 @@ public class PlayerInventory : MonoBehaviour
         GameSession.Instance.SaveItems(items);
     }
 
-    
+    public ItemSaveData[] ExportItems()
+    {
+        ItemSaveData[] result =
+        new ItemSaveData[items.Count];
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            ItemSaveData itemData =
+            new()
+            {
+                id = items[i].Id,
+                itemName = items[i].ItemName,
+                quantity = items[i].Quantity
+            };
+
+            result[i] = itemData;
+        }
+        return result;
+    }
+
+    public void ImportItems(ItemSaveData[] savedItems)
+    {
+        items.Clear();
+
+        if (savedItems == null)
+        {
+            RefeshUI();
+            return;
+        }
+
+        foreach (ItemSaveData savedItem in savedItems)
+        {
+            if (savedItem.quantity <= 0) continue;
+
+            Item item = new(
+            savedItem.id,
+            savedItem.itemName,
+            savedItem.quantity
+            );
+
+            items.Add(item);
+        }
+        SaveInventory();
+        RefeshUI();
+    }
+
+    public void SetCoinCount(int amount)
+    {
+        coinCount = Mathf.Max(amount, 0);
+
+        SaveInventory();
+
+        if (coinCounterUI != null)
+        {
+            coinCounterUI.SetCointCount(coinCount);
+        }
+    }
+
 }

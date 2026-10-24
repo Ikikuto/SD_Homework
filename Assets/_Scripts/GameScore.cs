@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +38,8 @@ public class GameScore : MonoBehaviour
 
         score += amount;
 
+        SetScore(score + amount);
+
         if (GameSession.Instance != null)
         {
             GameSession.Instance.Score = score;
@@ -64,6 +67,21 @@ public class GameScore : MonoBehaviour
         {
             AddScore(10);
         }
+    }
+
+    public void SetScore(int value)
+    {
+        score = Mathf.Max(value, 0);
+        if (GameSession.Instance != null)
+        {
+            GameSession.Instance.Score = score;
+        }
+
+        if (PersistentGameManager.Instance != null)
+        {
+            PersistentGameManager.Instance.UpdateHighScore(score);
+        }
+        UpdateUI();
     }
 
 }
