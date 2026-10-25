@@ -4,8 +4,8 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     public static GameSession Instance {get; private set;}
-    public int CurrentHealth { get; set; }
-    public bool HasSavedHealth { get; set; }
+    public int CurrentHealth { get; private set; }
+    public bool HasSavedHealth { get; private set; }
     public int CoinCount { get; set; }
     public int Score { get; set; }
     private readonly List<Item> savedItems = new();
@@ -33,7 +33,11 @@ public class GameSession : MonoBehaviour
         savedItems.Clear();
         foreach (Item item in items)
         {
-            savedItems.Add(new Item(item.Id, item.ItemName,item.Quantity));
+            savedItems.Add(new Item(
+                item.Id, 
+                item.ItemName,
+                item.Quantity)
+                );
         }
     }
 
@@ -42,7 +46,11 @@ public class GameSession : MonoBehaviour
         List<Item> result = new();
         foreach (Item item in savedItems)
         {
-            result.Add(new Item(item.Id,item.ItemName,item.Quantity));
+            result.Add(new Item(
+                item.Id,
+                item.ItemName,
+                item.Quantity)
+                );
         }
         return result;
     }
@@ -55,4 +63,6 @@ public class GameSession : MonoBehaviour
         Score = 0;
         savedItems.Clear();
     }
+
+
 }

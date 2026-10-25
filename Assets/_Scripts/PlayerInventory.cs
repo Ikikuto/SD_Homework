@@ -10,10 +10,7 @@ public class PlayerInventory : MonoBehaviour
 
     public int CoinCount
     {
-        get
-        {
-            return coinCount;
-        }
+        get { return coinCount; }
     }
 
     private void Start()
@@ -21,28 +18,20 @@ public class PlayerInventory : MonoBehaviour
         LoadInventory();
 
         if (coinCounterUI != null)
-        {
             coinCounterUI.SetCointCount(coinCount);
-        }
 
         RefeshUI();
     }
 
     public void AddCoin(int amount)
     {
-        if (amount <= 0)
-        {
-            return;
-        }
+        if (amount <= 0) return;
 
         coinCount += amount;
-
         SaveInventory();
 
         if (coinCounterUI != null)
-        {
             coinCounterUI.SetCointCount(coinCount);
-        }
     }
 
     private List<Item> items = new();
@@ -155,10 +144,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void LoadInventory()
     {
-        if (GameSession.Instance == null)
-        {
-            return;
-        }
+        if (GameSession.Instance == null) return;
 
         coinCount = GameSession.Instance.CoinCount;
         items = GameSession.Instance.LoadItems();
@@ -166,10 +152,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void SaveInventory()
     {
-        if (GameSession.Instance == null)
-        {
-            return;
-        }
+        if (GameSession.Instance == null) return;
 
         GameSession.Instance.CoinCount = coinCount;
         GameSession.Instance.SaveItems(items);
@@ -232,5 +215,6 @@ public class PlayerInventory : MonoBehaviour
             coinCounterUI.SetCointCount(coinCount);
         }
     }
+
 
 }
