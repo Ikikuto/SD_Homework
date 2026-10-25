@@ -55,16 +55,9 @@ public class PlayerHealth : MonoBehaviour
 
         UpdateHealth();
 
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(currentHealth, maxHealth);
-        }
-
-        if (currentHealth == 0)
-        {
-            Die();
-        }
+        if (currentHealth == 0) Die();
     }
+
     private void Die()
     {
         Debug.Log("Player died");
@@ -78,20 +71,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int amount)
     {
-        if (amount <= 0 || currentHealth == 0)
-        {
-            return;
-        }
+        if (amount <= 0 || currentHealth == 0) return;
 
         currentHealth =
             Mathf.Min(currentHealth + amount, maxHealth);
 
         UpdateHealth();
-
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(currentHealth, maxHealth);
-        }
     }
 
     private void UpdateHealth()
@@ -99,17 +84,13 @@ public class PlayerHealth : MonoBehaviour
         SaveHealth();
 
         if (healthBarUI != null)
-        {
             healthBarUI.SetHealth(currentHealth, maxHealth);
-        }
     }
 
     private void SaveHealth()
     {
         if (GameSession.Instance != null)
-        {
             GameSession.Instance.SaveHealth(currentHealth);
-        }
     }
 
     //CHECK LAI PHAN NAY
@@ -127,4 +108,6 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
+
+
 }

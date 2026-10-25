@@ -12,13 +12,13 @@ public class LevelExit : MonoBehaviour
         if(!collision.CompareTag("Player")) return;
         if(isLoading) return;
 
-        PlayerInventory playerInventory = collision.GetComponentInParent<PlayerInventory>();
+        PlayerInventory playerInventory = 
+            collision.GetComponentInParent<PlayerInventory>();
         if(playerInventory == null)
         {
             Debug.Log("null");
             return;
         }
-        
         else if (playerInventory.HasItem(1, 2))
         {
             isLoading = true;
