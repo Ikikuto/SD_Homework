@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        if (GameSession.Instance != null &&
+        if (GameSession.Instance != null && 
         GameSession.Instance.HasSavedHealth)
         {
             currentHealth = Mathf.Clamp(
@@ -48,23 +48,18 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        currentHealth =
-            Mathf.Max(currentHealth - damage, 0);
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
 
         // Debug.Log("Player Health: " + currentHealth);
 
         UpdateHealth();
-
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(currentHealth, maxHealth);
-        }
 
         if (currentHealth == 0)
         {
             Die();
         }
     }
+
     private void Die()
     {
         Debug.Log("Player died");
@@ -127,4 +122,6 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
+
+
 }

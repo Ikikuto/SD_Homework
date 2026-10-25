@@ -7,13 +7,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField, Min(1)] private int maxSlots = 5;
     private int coinCount;
-
     public int CoinCount
     {
-        get
-        {
-            return coinCount;
-        }
+        get{ return coinCount; }
     }
 
     private void Start()
@@ -22,7 +18,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (coinCounterUI != null)
         {
-            coinCounterUI.SetCointCount(coinCount);
+            coinCounterUI.SetCoinCount(coinCount);
         }
 
         RefeshUI();
@@ -41,7 +37,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (coinCounterUI != null)
         {
-            coinCounterUI.SetCointCount(coinCount);
+            coinCounterUI.SetCoinCount(coinCount);
         }
     }
 
@@ -153,23 +149,17 @@ public class PlayerInventory : MonoBehaviour
             && existingItem.Quantity >= amount;
     }
 
-    private void LoadInventory()
+    public void LoadInventory()
     {
-        if (GameSession.Instance == null)
-        {
-            return;
-        }
+        if (GameSession.Instance == null) return;
 
         coinCount = GameSession.Instance.CoinCount;
         items = GameSession.Instance.LoadItems();
     }
 
-    private void SaveInventory()
+    public void SaveInventory()
     {
-        if (GameSession.Instance == null)
-        {
-            return;
-        }
+        if (GameSession.Instance == null) return;
 
         GameSession.Instance.CoinCount = coinCount;
         GameSession.Instance.SaveItems(items);
@@ -229,7 +219,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (coinCounterUI != null)
         {
-            coinCounterUI.SetCointCount(coinCount);
+            coinCounterUI.SetCoinCount(coinCount);
         }
     }
 

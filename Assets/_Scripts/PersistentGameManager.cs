@@ -31,7 +31,6 @@ public class PersistentGameManager : MonoBehaviour
         if(currentScore > highScore)
         {
             highScore = currentScore;
-
             Debug.Log("New High Score: " + highScore);
         }
     }

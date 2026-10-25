@@ -18,7 +18,6 @@ public class LevelExit : MonoBehaviour
             Debug.Log("null");
             return;
         }
-        
         else if (playerInventory.HasItem(1, 2))
         {
             isLoading = true;
