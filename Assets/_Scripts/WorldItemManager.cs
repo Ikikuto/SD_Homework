@@ -6,7 +6,7 @@ public class WorldItemManager : MonoBehaviour
     {
         WorldItem[] worldItems = 
             FindObjectsByType<WorldItem>(
-                FindObjectsSortMode.None); //FindObjectsByType
+                FindObjectsSortMode.None); //FindObjectsOfType
 
         if (data.remainWorldItemIds == null)
         {

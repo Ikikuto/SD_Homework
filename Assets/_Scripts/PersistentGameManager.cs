@@ -35,5 +35,7 @@ public class PersistentGameManager : MonoBehaviour
             Debug.Log("New High Score: " + highScore);
         }
     }
+
+    
 }
 

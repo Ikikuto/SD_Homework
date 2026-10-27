@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     public int CurrentHealth
     {
-        get{return currentHealth;}
+        get{ return currentHealth; }
     }
     // private void Awake()
     // {
@@ -103,7 +103,7 @@ public class PlayerHealth : MonoBehaviour
             healthBarUI.SetHealth(currentHealth, maxHealth);
         }
 
-        if (currentHealth == 0)
+        if (currentHealth == 0 && gameObject.activeSelf)
         {
             Die();
         }

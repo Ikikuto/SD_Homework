@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; //Sau khi game over
+        Time.timeScale = 1f; //Sau khi game over...
 
         if (GameSession.Instance != null)
         {

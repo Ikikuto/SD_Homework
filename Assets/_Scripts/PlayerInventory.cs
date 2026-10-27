@@ -161,17 +161,17 @@ public class PlayerInventory : MonoBehaviour
     public ItemSaveData[] ExportItems()
     {
         ItemSaveData[] result =
-        new ItemSaveData[items.Count];
+            new ItemSaveData[items.Count];
 
         for (int i = 0; i < items.Count; i++)
         {
             ItemSaveData itemData =
-            new()
-            {
-                id = items[i].Id,
-                itemName = items[i].ItemName,
-                quantity = items[i].Quantity
-            };
+                new()
+                {
+                    id = items[i].Id,
+                    itemName = items[i].ItemName,
+                    quantity = items[i].Quantity
+                };
 
             result[i] = itemData;
         }
@@ -180,7 +180,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void ImportItems(ItemSaveData[] savedItems)
     {
-        items.Clear();
+        items.Clear(); // Delete old state
 
         if (savedItems == null)
         {
@@ -193,9 +193,9 @@ public class PlayerInventory : MonoBehaviour
             if (savedItem.quantity <= 0) continue;
 
             Item item = new(
-            savedItem.id,
-            savedItem.itemName,
-            savedItem.quantity
+                savedItem.id,
+                savedItem.itemName,
+                savedItem.quantity
             );
 
             items.Add(item);
