@@ -13,34 +13,36 @@ public class SaveLoadUI : MonoBehaviour
     [SerializeField] private WorldItemManager worldItemManager;
     private static SaveData pendingLoad;
 
-    //System.Collections for IEnumerator
-    // private IEnumerator Start() 
-    // {
-    //     if (pendingLoad == null) yield break;
-    //     yield return null;
+    // System.Collections for IEnumerator
+    private IEnumerator Start() 
+    {
+        if (pendingLoad == null) yield break;
+        yield return null;
 
-    //     SaveData data = pendingLoad;
+        SaveData data = pendingLoad;
 
-    //     if (player == null || playerHealth == null ||
-    //     gameScore == null || playerInventory == null ||
-    //     worldItemManager == null)
-    //     {
-    //         Debug.LogError("Missing Restore references");
-    //         yield break;
-    //     }
+        if (player == null || playerHealth == null ||
+            gameScore == null || playerInventory == null ||
+            worldItemManager == null)
+        {
+            Debug.LogError("Missing Restore references");
+            yield break;
+        }
 
-    //     player.position = new Vector3(
-    //     data.playerX, data.playerY, 0
-    //     );
-    //     playerHealth.SetHealth(data.health);
-    //     gameScore.SetScore(data.score);
-    //     playerInventory.SetCoinCount(data.coinCount);
-    //     playerInventory.ImportItems(data.items);
-    //     worldItemManager.RestoreWorldItems(data);
+        player.position = new Vector3(
+            data.playerX, 
+            data.playerY, 
+            0
+        );
+        playerHealth.SetHealth(data.health);
+        gameScore.SetScore(data.score);
+        playerInventory.SetCoinCount(data.coinCount);
+        playerInventory.ImportItems(data.items);
+        worldItemManager.RestoreWorldItems(data);
 
-    //     pendingLoad = null;
-    //     Debug.Log("Game loaded successfully");
-    // }
+        pendingLoad = null;
+        Debug.Log("Game loaded successfully");
+    }
 
     public void SaveGame()
     {
@@ -70,8 +72,7 @@ public class SaveLoadUI : MonoBehaviour
 
     public void LoadGame()
     {
-        if (saveSystem == null || player == null ||
-        playerHealth == null || gameScore == null)
+        if(saveSystem == null)
         {
             Debug.LogWarning("Missing Load references");
             return;
@@ -84,46 +85,15 @@ public class SaveLoadUI : MonoBehaviour
             return;
         }
 
-        player.position = new Vector3(
-            data.playerX, data.playerY, 0
-        );
-        playerHealth.SetHealth(data.health);
-        gameScore.SetScore(data.score);
-        playerInventory.SetCoinCount(data.coinCount);
-        playerInventory.ImportItems(data.items);
-
-        // if (data.health > 0 && gameManager != null)
-        // {
-        //     gameManager.ResumeGame();
-        // }
-
-        // pendingLoad = null;
-        Debug.Log("Game loaded successfully");
+        if (string.IsNullOrEmpty(data.sceneName))
+        {
+            Debug.LogWarning("Missing save scene name");
+            return;
+        }
+        pendingLoad = data;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(data.sceneName);
     }
 
-    // public void LoadGame()
-    // {
-    //     if (saveSystem == null)
-    //     {
-    //         Debug.LogWarning("Missing Load references");
-    //         return;
-    //     }
-
-    //     SaveData data = saveSystem.LoadGame();
-    //     if (data == null)
-    //     {
-    //         Debug.LogWarning("No save file found");
-    //         return;
-    //     }
-
-    //     if(string.IsNullOrEmpty(data.sceneName))
-    //     {
-    //         Debug.LogWarning("Missing saved scene name");
-    //         return;
-    //     }
-    //     pendingLoad = data;
-    //     Time.timeScale = 1f;
-    //     SceneManager.LoadScene(data.sceneName);
-    // }
 
 }

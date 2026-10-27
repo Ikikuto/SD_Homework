@@ -10,6 +10,7 @@ public class SaveSystem : MonoBehaviour
 
         File.WriteAllText(path, json); //ghi vao file json
         Debug.Log("Game saved");
+        Debug.Log("Save Path: " + path);
     }
 
     public SaveData LoadGame()
@@ -35,6 +36,11 @@ public class SaveSystem : MonoBehaviour
 
     private string GetSavePath()
     {
-        return Path.Combine(Application.persistentDataPath, "savegame.json");
+        return Path.Combine(
+            Application.persistentDataPath, 
+            "savegame.json"
+            );
     }
+
+
 }

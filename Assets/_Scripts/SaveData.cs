@@ -13,8 +13,5 @@ public class SaveData
 
     public string[] remainWorldItemIds;
 
-    // SaveData data = new SaveData();
-    // data.health = 80;
-    // data.score = 500;
-    // string json = JsonUtility.ToJson(data, true);
+    
 }

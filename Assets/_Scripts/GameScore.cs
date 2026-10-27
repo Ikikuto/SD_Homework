@@ -30,7 +30,6 @@ public class GameScore : MonoBehaviour
         if (amount <= 0) return;
 
         score += amount;
-
         SetScore(score + amount);
 
         if (GameSession.Instance != null)

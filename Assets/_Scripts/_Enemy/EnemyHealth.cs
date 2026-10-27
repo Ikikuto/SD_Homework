@@ -34,10 +34,8 @@ public class EnemyHealth : MonoBehaviour
             Mathf.Max(currentHealth - damage, 0);
         Debug.Log(transform.parent.name + ": " + currentHealth);
 
-        if (currentHealth == 0)
-        {
-            Die();
-        }
+        if (currentHealth == 0) Die();
+        
         ApplyKnockback(attackerPosition);
     }
 

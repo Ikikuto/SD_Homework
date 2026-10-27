@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4208373110166187886}
-  - component: {fileID: 2046874119492068380}
   - component: {fileID: 4255832800971256050}
   - component: {fileID: 1490752523294575233}
   - component: {fileID: 676554353444225858}
+  - component: {fileID: 5926836663322012739}
   m_Layer: 7
   m_Name: NormalEnemy
   m_TagString: Enemy
@@ -36,21 +36,6 @@ Transform:
   - {fileID: 1687180591120328736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046874119492068380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966057106258645544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee48bc21e3fd5704fa1a8710531cb77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: Goblin
-  damage: 40
-  healthPoint: 75
 --- !u!50 &4255832800971256050
 Rigidbody2D:
   serializedVersion: 5
@@ -105,6 +90,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   attackCooldown: 1
+--- !u!114 &5926836663322012739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966057106258645544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e13d897b44c7b448b40cde498e68c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  chaseRange: 6
+  attackRange: 1.5
 --- !u!1 &6637321414224577034
 GameObject:
   m_ObjectHideFlags: 0

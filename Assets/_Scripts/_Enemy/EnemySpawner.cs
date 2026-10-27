@@ -5,6 +5,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] private float respawnDelay = 2f;
+    [SerializeField] private Transform pointA;
+    [SerializeField] private Transform pointB;
 
     private void Start()
     {
@@ -38,6 +40,11 @@ public class EnemySpawner : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.SetSpawner(this);
+        }
+
+        if (enemy.TryGetComponent<EnemyAI>(out var enemyAI))
+        {
+            enemyAI.SetPatrolPoints(pointA, pointB);
         }
     }
 

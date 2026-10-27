@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4208373110166187886}
-  - component: {fileID: 2046874119492068380}
   - component: {fileID: 4255832800971256050}
   - component: {fileID: 1490752523294575233}
   - component: {fileID: 1998052900851457096}
+  - component: {fileID: 5456576966618369989}
   m_Layer: 7
   m_Name: FastEnemy
   m_TagString: Enemy
@@ -36,21 +36,6 @@ Transform:
   - {fileID: 1687180591120328736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046874119492068380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966057106258645544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee48bc21e3fd5704fa1a8710531cb77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: Goblin
-  damage: 40
-  healthPoint: 75
 --- !u!50 &4255832800971256050
 Rigidbody2D:
   serializedVersion: 5
@@ -90,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75392982a4350b4babb0935a954a62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
+  moveSpeed: 4
 --- !u!114 &1998052900851457096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +89,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  attackCooldown: 1
+  attackCooldown: 0.7
+--- !u!114 &5456576966618369989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966057106258645544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e13d897b44c7b448b40cde498e68c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  chaseRange: 8
+  attackRange: 1.2
 --- !u!1 &6637321414224577034
 GameObject:
   m_ObjectHideFlags: 0
